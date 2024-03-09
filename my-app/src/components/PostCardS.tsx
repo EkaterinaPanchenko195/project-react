@@ -6,23 +6,24 @@ import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 
-const PostCardM = ({ postCard, isTopicColor }: TPostCardXlProps) => {
-  const { id, image, date, title } = postCard;
+const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const { id, image, date, title } = postCard;
   return (
     <Container key={id}>
       <Div>
+        <Block>
+          <Date>{date}</Date>
+          <Title>{title}</Title>
+        </Block>
+
         <Block>
           <BlockImg>
             <Avatar src={image} alt="Image - astronaut" />
           </BlockImg>
         </Block>
-        <Block>
-          <Date>{date}</Date>
-          <Title>{title}</Title>
-        </Block>
       </Div>
-      <DivContainer>
+      <Div>
         <Response>
           <DivIcon>
             <ResponseImage
@@ -55,7 +56,7 @@ const PostCardM = ({ postCard, isTopicColor }: TPostCardXlProps) => {
             />
           </DivIcon>
         </Response>
-      </DivContainer>
+      </Div>
       {isMenuVisible && (
         <MenuDiv>
           <MenuButton>Edit</MenuButton>
@@ -66,15 +67,19 @@ const PostCardM = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   );
 };
 
-export default PostCardM;
+export default PostCardS;
 
 const Container = styled.article`
-  position: relative;
+  aspect-ratio: 352 / 206;
   border-bottom: 1px solid rgba(218, 218, 218, 1);
+  width: 100%;
+  position: relative;
 `;
 
 const Div = styled.div`
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 33px;
 `;
 const Block = styled.div``;
 const Date = styled.div`
@@ -84,11 +89,13 @@ const DivIcon = styled.div`
   cursor: pointer;
 `;
 const BlockImg = styled.div`
-  width: 100%;
+  width: 96px;
+  height: 96px;
 `;
 const Title = styled.h2`
   font-size: 18px;
   font-weight: 700;
+  margin-right: 10px;
   &:hover {
     color: rgba(34, 49, 170, 1);
   }
@@ -98,7 +105,8 @@ const Description = styled.p`
   line-height: 28px;
 `;
 const Avatar = styled.img`
-  width: 100%;
+  width: 96px;
+  height: 96px;
 `;
 const Response = styled.div`
   display: flex;
@@ -131,10 +139,4 @@ const MenuButton = styled.button`
   &:first-child {
     margin-bottom: 2px;
   }
-`;
-
-const DivContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
 `;

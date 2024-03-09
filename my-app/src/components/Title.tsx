@@ -7,6 +7,7 @@ export default Title;
 
 const StyledTitle = styled.h2`
   font-weight: 700;
-  font-size: 56p;
+  font-size: 56px;
   line-height: 80px;
+  margin-bottom: 40px;
 `;

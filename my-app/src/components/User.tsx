@@ -20,10 +20,9 @@ export default User;
 const StyledContainer = styled.div`
   align-items: center;
   background-color: rgba(34, 49, 170, 1);
+  cursor: pointer;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  padding: 0 30px;
   width: 200px;
 `;
 

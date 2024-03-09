@@ -13,7 +13,13 @@ export type TTitleProps = {
   text: string;
 };
 
+export type TMenuProps = {
+  text: string;
+  isTopicColor: boolean
+};
+
 export type TTabsProps = {
+  isTopicColor: boolean
   tabs: {
     id: number;
     isActive: boolean;
@@ -35,6 +41,7 @@ export type TTextareaProps = {
 };
 
 export type TPostCardXlProps = {
+  isTopicColor: boolean
   postCard: {
     id: number;
     image?: string;
@@ -43,5 +50,6 @@ export type TPostCardXlProps = {
     title: string;
     description: string;
     author: number;
-  } [];
+  };
 };
+

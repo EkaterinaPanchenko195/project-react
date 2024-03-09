@@ -1,15 +1,26 @@
 import { TButtonProps } from "./types";
 import styled from "styled-components";
 
-const Button = ({ text, isDisabled, onClick, buttonType, ...rest }: TButtonProps) => (
-  <StyledButton {...rest} buttonType={buttonType} disabled={isDisabled} onClick={onClick}>
+const Button = ({
+  text,
+  isDisabled,
+  onClick,
+  buttonType,
+  ...rest
+}: TButtonProps) => (
+  <StyledButton
+    {...rest}
+    $buttontype={buttonType}
+    disabled={isDisabled}
+    onClick={onClick}
+  >
     {text}
   </StyledButton>
 );
 
 export default Button;
 
-const getButtonStyles = (buttonType: string) => {
+const getButtonStyles = ($buttontype: string) => {
   const defaultStyles = {
     backgroundColor: "rgba(34, 49, 170, 1)",
     color: "#fff",
@@ -20,7 +31,7 @@ const getButtonStyles = (buttonType: string) => {
     disabledColor: "#8e8f98",
   };
 
-  switch (buttonType) {
+  switch ($buttontype) {
     case "secondary":
       return {
         ...defaultStyles,
@@ -44,8 +55,8 @@ const getButtonStyles = (buttonType: string) => {
   }
 };
 
-const StyledButton = styled.button<{ buttonType: string }>`
-  ${({ buttonType, ...rest }) => {
+const StyledButton = styled.button<{ $buttontype: string }>`
+  ${({ $buttontype}) => {
     const {
       backgroundColor,
       color,
@@ -54,7 +65,7 @@ const StyledButton = styled.button<{ buttonType: string }>`
       hoverBorder,
       disabledBackgroundColor,
       disabledColor,
-    } = getButtonStyles(buttonType);
+    } = getButtonStyles($buttontype);
 
     return `
         background-color: ${backgroundColor};

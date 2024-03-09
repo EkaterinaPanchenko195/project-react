@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import { TTabsProps } from "./types";
 
-const Tabs = ({ tabs }: TTabsProps) => (
+const Tabs = ({ tabs, isTopicColor }: TTabsProps) => (
   <Container>
     {tabs.map(({ id, isActive, text, isDisabled }) => (
-      <StyledButton key={id} isActive={isActive} disabled={isDisabled}>
+      <StyledButton
+        $istopiccolor={isTopicColor}
+        key={id}
+        $isactive={isActive}
+        disabled={isDisabled}
+      >
         {text}
       </StyledButton>
     ))}
@@ -15,15 +20,19 @@ export default Tabs;
 
 const Container = styled.div`
   display: flex;
-  margin-bottom: 40px;
 `;
 
-const StyledButton = styled.button<{ isActive: boolean }>`
-  ${({ isActive, ...rest }) => `
-    background-color: #fefefe;
-    border: 1px solid #fefefe;
+const StyledButton = styled.button<{
+  $isactive: boolean;
+  $istopiccolor: boolean;
+}>`
+  ${({ $isactive, $istopiccolor }) => `
+    background-color:${$istopiccolor ? "transparent" : "rgba(49, 48, 55, 1)"};
+    color:${$istopiccolor ? "rgba(49, 48, 55, 1)" : "rgba(255, 255, 255, 1)"};
+    border:none;
+    border-bottom: 1px solid rgba(218, 218, 218, 1);
     border-bottom: ${
-      isActive ? "2px solid" : "1px solid rgba(218, 218, 218, 1)"
+      $isactive ? "2px solid" : "1px solid rgba(218, 218, 218, 1)"
     };
     cursor: pointer;
     font-weight: 600;
