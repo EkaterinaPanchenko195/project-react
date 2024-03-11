@@ -2,17 +2,18 @@ import styled from "styled-components";
 import { TInputProps } from "./types";
 import { useState } from "react";
 
-const Input = ({ placeholder, labelName, isDisabled }: TInputProps) => {
+const Input = ({ placeholder, labelName, isDisabled, type }: TInputProps) => {
   const [error, setError] = useState("");
 
   return (
     <StyledContainer>
       <StyledLabel>{labelName}</StyledLabel>
       <StyledInput
-        $haserror={error.length > 10}
+        $haserror={error.length > 30}
         placeholder={placeholder}
         disabled={isDisabled}
         onChange={(e) => setError(e.target.value)}
+        type={type}
       />
     </StyledContainer>
   );
@@ -32,10 +33,12 @@ const StyledLabel = styled.label`
   margin-bottom: 8px;
 `;
 const StyledInput = styled.input<{ $haserror: boolean }>`
-  ${({ $haserror}) => `
+  ${({ $haserror }) => `
     border: none;
     border-radius: 2px;
     height: 56px;
+    margin-bottom: 40px;
+    padding: 0 10px;
     width: 544px;
 
     &:focus {

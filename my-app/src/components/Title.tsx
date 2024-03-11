@@ -9,5 +9,6 @@ const StyledTitle = styled.h2`
   font-weight: 700;
   font-size: 56px;
   line-height: 80px;
+  margin: 0;
   margin-bottom: 40px;
 `;

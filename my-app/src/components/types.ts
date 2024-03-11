@@ -15,11 +15,11 @@ export type TTitleProps = {
 
 export type TMenuProps = {
   text: string;
-  isTopicColor: boolean
+  isTopicColor: boolean;
 };
 
 export type TTabsProps = {
-  isTopicColor: boolean
+  isTopicColor: boolean;
   tabs: {
     id: number;
     isActive: boolean;
@@ -33,6 +33,7 @@ export type TInputProps = {
   labelName: string;
   isDisabled: boolean;
   hasError: boolean;
+  type: string;
 };
 
 export type TTextareaProps = {
@@ -41,7 +42,7 @@ export type TTextareaProps = {
 };
 
 export type TPostCardXlProps = {
-  isTopicColor: boolean
+  isTopicColor: boolean;
   postCard: {
     id: number;
     image?: string;
@@ -53,3 +54,15 @@ export type TPostCardXlProps = {
   };
 };
 
+export type TBlockForSendingDataProps = {
+  buttonSignName: string;
+  buttonbackName: string;
+  description: string;
+};
+
+export type TAccountActivationNotification = {
+  description: string;
+  email?: string;
+  descriptionEmail: string;
+  button: string;
+};

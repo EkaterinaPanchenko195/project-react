@@ -180,7 +180,7 @@ const ListOfPosts = ({ isTopicColor }: { isTopicColor: boolean }) => {
 
 export default ListOfPosts;
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   column-gap: 32px;
 `;
