@@ -66,3 +66,19 @@ export type TAccountActivationNotification = {
   descriptionEmail: string;
   button: string;
 };
+
+export type TPostCard = {
+  id: number;
+  image?: string;
+  text: string;
+  date: string;
+  lesson_num: number;
+  title: string;
+  description: string;
+  author: number;
+};
+
+export type TSelectedPostProps = {
+  postCard:  TPostCard;
+  isTopicColor: boolean;
+};
