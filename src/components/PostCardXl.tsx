@@ -5,7 +5,7 @@ import IconLike from "../image/IconLike.png";
 import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const PostCardXl = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   const { id, image, date, title, description } = postCard;
@@ -13,61 +13,61 @@ const PostCardXl = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   return (
     <>
       <Container key={id}>
-        <Div>
-          <Block>
-            <Date>{date}</Date>
-            <Title>
-              <LinkTitle to={"/SelectedPost"}>{title}</LinkTitle>
-            </Title>
-            <Description>{description}</Description>
-          </Block>
+        <LinkTitle to={`/SelectedPost/${id}`}>
+          <Div>
+            <Block>
+              <Date>{date}</Date>
+              <Title>{title}</Title>
+              <Description>{description}</Description>
+            </Block>
 
-          <Block>
-            <BlockImg>
-              <Avatar src={image} alt="Image - astronaut" />
-            </BlockImg>
-          </Block>
-        </Div>
-        <Div>
-          <Response>
-            <DivIcon>
-              <ResponseImage
-                $istopiccolor={isTopicColor}
-                src={IconLike}
-                alt="IconLike"
-              />
-            </DivIcon>
-            <DivIcon>
-              <ResponseImage
-                $istopiccolor={isTopicColor}
-                src={IconDislike}
-                alt="IconDislike"
-              />
-            </DivIcon>
-          </Response>
-          <Response>
-            <DivIcon>
-              <ResponseImage
-                $istopiccolor={isTopicColor}
-                src={IconSave}
-                alt="IconSave"
-              />
-            </DivIcon>
-            <DivIcon onClick={() => setIsMenuVisible(!isMenuVisible)}>
-              <ResponseImage
-                $istopiccolor={isTopicColor}
-                src={IconMore}
-                alt="IconMore"
-              />
-            </DivIcon>
-          </Response>
-        </Div>
-        {isMenuVisible && (
-          <MenuDiv>
-            <MenuButton>Edit</MenuButton>
-            <MenuButton>Delete</MenuButton>
-          </MenuDiv>
-        )}
+            <Block>
+              <BlockImg>
+                <Avatar src={image} alt="Image - astronaut" />
+              </BlockImg>
+            </Block>
+          </Div>
+          <Div>
+            <Response>
+              <DivIcon>
+                <ResponseImage
+                  $istopiccolor={isTopicColor}
+                  src={IconLike}
+                  alt="IconLike"
+                />
+              </DivIcon>
+              <DivIcon>
+                <ResponseImage
+                  $istopiccolor={isTopicColor}
+                  src={IconDislike}
+                  alt="IconDislike"
+                />
+              </DivIcon>
+            </Response>
+            <Response>
+              <DivIcon>
+                <ResponseImage
+                  $istopiccolor={isTopicColor}
+                  src={IconSave}
+                  alt="IconSave"
+                />
+              </DivIcon>
+              <DivIcon onClick={() => setIsMenuVisible(!isMenuVisible)}>
+                <ResponseImage
+                  $istopiccolor={isTopicColor}
+                  src={IconMore}
+                  alt="IconMore"
+                />
+              </DivIcon>
+            </Response>
+          </Div>
+          {isMenuVisible && (
+            <MenuDiv>
+              <MenuButton>Edit</MenuButton>
+              <MenuButton>Delete</MenuButton>
+            </MenuDiv>
+          )}
+        </LinkTitle>
       </Container>
     </>
   );
@@ -83,8 +83,7 @@ const Container = styled.article`
 `;
 
 const LinkTitle = styled(Link)`
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 18px;
   text-decoration: none;
   color: inherit;
 

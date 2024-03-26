@@ -12,8 +12,9 @@ import SelectedPostImg from "./image/SelectedPost.svg";
 import { TPostCard } from "./components/types";
 import imageBlock from "./image/postCard.svg";
 import imageM from "./image/PostCardM.svg";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import AddPost from "./components/AddPost";
+import WrongAddress from "./components/WrongAddress";
 // import SearchResults from "./components/SearchResults ";
 // import Button from "./components/Button";
 // import User from "./components/User";
@@ -195,9 +196,10 @@ const App = () => {
       <Header setIsTopicColor={setIsTopicColor} />
       <Main $isTopicColor={isTopicColor}>
         <Routes>
+          <Route path="*" element={<WrongAddress />}></Route>
           <Route
             index
-            path="/Home"
+            path="/home"
             element={
               <ListOfPosts
                 defoltPostCardData={defoltPostCardData}
@@ -207,9 +209,9 @@ const App = () => {
               />
             }
           ></Route>
-          <Route path="/AddPost" element={<AddPost />} />
+          <Route path="/addPost" element={<AddPost />} />
           <Route
-            path="/SelectedPost"
+            path="/selectedPost/:id"
             element={
               <SelectedPost
                 postCard={postCard[0]}
@@ -217,11 +219,11 @@ const App = () => {
               />
             }
           />
-          <Route path="/SignIn" element={<SignIn />} />
-          <Route path="/Success" element={<Success />} />
-          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/signUp" element={<SignUp />} />
           <Route
-            path="/SuccessfulConfirmation"
+            path="/successfulConfirmation"
             element={<SuccessfulConfirmation />}
           />
         </Routes>

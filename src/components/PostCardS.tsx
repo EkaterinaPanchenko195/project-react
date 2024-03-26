@@ -12,60 +12,60 @@ const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   const { id, image, date, title } = postCard;
   return (
     <Container key={id}>
-      <Div>
-        <Block>
-          <Date>{date}</Date>
-          <Title>
-            <LinkTitle to={"/SelectedPost"}>{title}</LinkTitle>
-          </Title>
-        </Block>
+      <LinkTitle to={`/SelectedPost/${id}`}>
+        <Div>
+          <Block>
+            <Date>{date}</Date>
+            <Title>{title}</Title>
+          </Block>
 
-        <Block>
-          <BlockImg>
-            <Avatar src={image} alt="Image - astronaut" />
-          </BlockImg>
-        </Block>
-      </Div>
-      <Div>
-        <Response>
-          <DivIcon>
-            <ResponseImage
-              $istopiccolor={isTopicColor}
-              src={IconLike}
-              alt="IconLike"
-            />
-          </DivIcon>
-          <DivIcon>
-            <ResponseImage
-              $istopiccolor={isTopicColor}
-              src={IconDislike}
-              alt="IconDislike"
-            />
-          </DivIcon>
-        </Response>
-        <Response>
-          <DivIcon>
-            <ResponseImage
-              $istopiccolor={isTopicColor}
-              src={IconSave}
-              alt="IconSave"
-            />
-          </DivIcon>
-          <DivIcon onClick={() => setIsMenuVisible(!isMenuVisible)}>
-            <ResponseImage
-              $istopiccolor={isTopicColor}
-              src={IconMore}
-              alt="IconMore"
-            />
-          </DivIcon>
-        </Response>
-      </Div>
-      {isMenuVisible && (
-        <MenuDiv>
-          <MenuButton>Edit</MenuButton>
-          <MenuButton>Delete</MenuButton>
-        </MenuDiv>
-      )}
+          <Block>
+            <BlockImg>
+              <Avatar src={image} alt="Image - astronaut" />
+            </BlockImg>
+          </Block>
+        </Div>
+        <Div>
+          <Response>
+            <DivIcon>
+              <ResponseImage
+                $istopiccolor={isTopicColor}
+                src={IconLike}
+                alt="IconLike"
+              />
+            </DivIcon>
+            <DivIcon>
+              <ResponseImage
+                $istopiccolor={isTopicColor}
+                src={IconDislike}
+                alt="IconDislike"
+              />
+            </DivIcon>
+          </Response>
+          <Response>
+            <DivIcon>
+              <ResponseImage
+                $istopiccolor={isTopicColor}
+                src={IconSave}
+                alt="IconSave"
+              />
+            </DivIcon>
+            <DivIcon onClick={() => setIsMenuVisible(!isMenuVisible)}>
+              <ResponseImage
+                $istopiccolor={isTopicColor}
+                src={IconMore}
+                alt="IconMore"
+              />
+            </DivIcon>
+          </Response>
+        </Div>
+        {isMenuVisible && (
+          <MenuDiv>
+            <MenuButton>Edit</MenuButton>
+            <MenuButton>Delete</MenuButton>
+          </MenuDiv>
+        )}
+      </LinkTitle>
     </Container>
   );
 };

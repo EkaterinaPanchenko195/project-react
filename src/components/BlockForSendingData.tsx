@@ -10,7 +10,7 @@ const BlockForSendingData = ({
     <Block>
       <Description>{description}</Description>
       <Buttonback>
-        <LinkButton to={buttonbackName === "Sign Up" ? "/SignUp" : "/SignIn"}>
+        <LinkButton to={buttonbackName === "Sign Up" ? "/signUp" : "/signIn"}>
           {buttonbackName}
         </LinkButton>
       </Buttonback>

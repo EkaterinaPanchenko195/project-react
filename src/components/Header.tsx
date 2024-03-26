@@ -29,13 +29,13 @@ const Header = ({
           <BlockButton>
             <User userName="Artem Malkin" />
             <MenuButton>
-              <LinkButton to={"/Home"}>Home</LinkButton>
+              <LinkButton to={"/home"}>Home</LinkButton>
             </MenuButton>
             <MenuButton>
-              <LinkButton to={"/AddPost"}>Add post</LinkButton>
+              <LinkButton to={"/addPost"}>Add post</LinkButton>
             </MenuButton>
             <MenuButton>
-              <LinkButton to={"/Home"}>Profile</LinkButton>
+              <LinkButton to={"/home"}>Profile</LinkButton>
             </MenuButton>
           </BlockButton>
           <BlockButton>
@@ -48,7 +48,7 @@ const Header = ({
               </Topic>
             </Topics>
             <TopicButton>
-              <LinkButton to={"/SignIn"}>Log Out</LinkButton>
+              <LinkButton to={"/signIn"}>Log Out</LinkButton>
             </TopicButton>
           </BlockButton>
         </MenuDiv>

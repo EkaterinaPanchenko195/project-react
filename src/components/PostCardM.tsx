@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 const PostCardM = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   const { id, image, date, title } = postCard;
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+
   return (
     <Container key={id}>
+      <LinkTitle to={`/selectedPost/${id}`}>
       <Div>
         <Block>
           <BlockImg>
@@ -21,7 +23,7 @@ const PostCardM = ({ postCard, isTopicColor }: TPostCardXlProps) => {
         <Block>
           <Date>{date}</Date>
           <Title>
-            <LinkTitle to={"/SelectedPost"}>{title}</LinkTitle>
+            {title}
           </Title>
         </Block>
       </Div>
@@ -65,6 +67,7 @@ const PostCardM = ({ postCard, isTopicColor }: TPostCardXlProps) => {
           <MenuButton>Delete</MenuButton>
         </MenuDiv>
       )}
+      </LinkTitle>
     </Container>
   );
 };

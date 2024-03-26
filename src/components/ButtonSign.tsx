@@ -6,7 +6,7 @@ const ButtonSign = ({ buttonSignName }: TBlockForSendingDataProps) => {
   return (
     <Button>
       <LinkButton
-        to={buttonSignName === "Sign In" ? "/Home" : "/SuccessfulConfirmation"}
+        to={buttonSignName === "Sign In" ? "/home" : "/successfulConfirmation"}
       >
         {buttonSignName}
       </LinkButton>
