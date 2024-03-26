@@ -15,6 +15,7 @@ export default Textarea;
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 48px;
 `;
 
 const StyledLabel = styled.label`
@@ -24,8 +25,9 @@ const StyledLabel = styled.label`
 `;
 
 const StyledTextarea = styled.textarea`
+    border: none;
   resize: none;
-  width: 688px;
+  width: 544px;
   height: 245px;
   padding-top: 18px;
   padding-left: 20px

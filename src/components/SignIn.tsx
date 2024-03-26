@@ -3,6 +3,7 @@ import BackToHomeButton from "./BackToHomeButton";
 import Title from "./Title";
 import Input from "./Input";
 import BlockForSendingData from "./BlockForSendingData";
+import ButtonSign from "./ButtonSign";
 
 const SignIn = () => {
   return (
@@ -29,11 +30,11 @@ const SignIn = () => {
             type={"password"}
           />
           <Description>Forgot password?</Description>
+          <ButtonSign buttonSignName={"Sign In"}/>
           <BlockForSendingData
-            buttonSignName={"Sign In"}
             buttonbackName={"Sign Up"}
             description={"Don’t have an account?"}
-          ></BlockForSendingData>
+          />
         </Form>
       </Container>
     </>

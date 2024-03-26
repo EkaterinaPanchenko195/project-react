@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { TAccountActivationNotification } from "./types";
+import { Link } from "react-router-dom";
 
 const AccountActivationNotification = ({
   description,
@@ -12,7 +13,9 @@ const AccountActivationNotification = ({
       <Description>{description}</Description>
       <Span>{email}</Span>
       <Description> {descriptionEmail}</Description>
-      <Button>{button}</Button>
+      <Button>
+        <LinkButton to="/Home">{button}</LinkButton>
+      </Button>
     </Conntainer>
   );
 };
@@ -25,11 +28,21 @@ const Conntainer = styled.div`
   padding: 40px;
   width: 624px;
 `;
+
+const LinkButton = styled(Link)`
+  color: rgb(255 255 255);
+  text-decoration: none;
+  font-size: 18px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Description = styled.p``;
 const Span = styled.span`
   font-weight: 700;
 `;
-const Button = styled.button`
+const Button = styled.div`
   background-color: rgba(34, 49, 170, 1);
   border: none;
   color: rgba(255, 255, 255);

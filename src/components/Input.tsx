@@ -32,14 +32,15 @@ const StyledLabel = styled.label`
   line-height: 20px;
   margin-bottom: 8px;
 `;
-const StyledInput = styled.input<{ $haserror: boolean }>`
-  ${({ $haserror }) => `
+const StyledInput = styled.input<{ $haserror: boolean; type: string }>`
+  ${({ $haserror, type }) => `
     border: none;
     border-radius: 2px;
     height: 56px;
     margin-bottom: 40px;
-    padding: 0 10px;
-    width: 544px;
+    padding:${type === "image" ? "0" : "0 10px"};
+    width:${type === "image" ? "564px" : "544px"}; 
+    background-color: #ffff;
 
     &:focus {
       outline: ${

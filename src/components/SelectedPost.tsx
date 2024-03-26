@@ -3,6 +3,8 @@ import IconLike from "../image/IconLike.png";
 import IconSave from "../image/IconSave.png";
 import IconDislike from "../image/IconDislike.png";
 import { TSelectedPostProps } from "./types";
+import rightArrow from "../image/rightArrow.svg";
+import leftArrow from "../image/leftArrow.svg";
 
 const SelectedPost = ({ postCard, isTopicColor }: TSelectedPostProps) => {
   const { id, image, title, description } = postCard;
@@ -47,6 +49,29 @@ const SelectedPost = ({ postCard, isTopicColor }: TSelectedPostProps) => {
           <DescriptionButton>Add to favorites</DescriptionButton>
         </ResponseButton>
       </Div>
+      <Navigation>
+        <NavigationDiv>
+          <NavigationBlockImg>
+            <NavigationImg
+              src={rightArrow}
+              alt="rightArrow"
+              $istopiccolor={isTopicColor}
+            />
+          </NavigationBlockImg>
+          <NavigationDescription>Prev</NavigationDescription>
+        </NavigationDiv>
+
+        <NavigationDiv>
+          <NavigationDescription>Next</NavigationDescription>
+          <NavigationBlockImg>
+            <NavigationImg
+              src={leftArrow}
+              alt="leftArrow"
+              $istopiccolor={isTopicColor}
+            />
+          </NavigationBlockImg>
+        </NavigationDiv>
+      </Navigation>
     </Container>
   );
 };
@@ -97,9 +122,9 @@ const Response = styled.div`
 `;
 const ResponseImage = styled.img<{ $istopiccolor: boolean }>`
   ${({ $istopiccolor }) => `
-     filter:${$istopiccolor ? "invert(1)" : "nvert(0)"};
+     filter:${$istopiccolor ? "invert(1)" : "invert(0)"};
 `}
-  margin-right:5px
+  margin-right:5px;
 `;
 
 const ResponseButton = styled.div`
@@ -111,4 +136,31 @@ const ResponseButton = styled.div`
 `;
 const DescriptionButton = styled.p`
   margin: 0;
+  color: rgba(49, 48, 55, 1);
+`;
+const Navigation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(218, 218, 218, 1);
+  padding-top: 50px;
+  padding-bottom: 50px;
+`;
+const NavigationDiv = styled.div`
+  display: flex;
+  cursor: pointer;
+`;
+const NavigationBlockImg = styled.div`
+  &:first-child {
+    margin-right: 10px;
+  }
+`;
+const NavigationImg = styled.img<{ $istopiccolor: boolean }>`
+  ${({ $istopiccolor }) => `
+filter:${$istopiccolor ? "invert(0)" : "invert(1)"};
+`}
+`;
+const NavigationDescription = styled.div`
+  &:first-child {
+    margin-right: 10px;
+  }
 `;

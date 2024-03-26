@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import User from "./User";
 import burger from "../image/Burger.svg";
-import search from "../image/IconSearch.svg";
+import searchImg from "../image/IconSearch.svg";
 import { useState } from "react";
 import sun from "../image/IconSun.svg";
 import dark from "../image/IconDark.svg";
+import { Link } from "react-router-dom";
 
 const Header = ({
   setIsTopicColor,
@@ -12,6 +13,7 @@ const Header = ({
   setIsTopicColor: (isTopicColor: boolean) => void;
 }) => {
   const [isMenuHeader, setisMenuHeader] = useState(false);
+  const [search, setSearch] = useState(false);
 
   return (
     <Container>
@@ -26,9 +28,15 @@ const Header = ({
         <MenuDiv>
           <BlockButton>
             <User userName="Artem Malkin" />
-            <MenuButton>Home</MenuButton>
-            <MenuButton>Add post</MenuButton>
-            <MenuButton>Profile</MenuButton>
+            <MenuButton>
+              <LinkButton to={"/Home"}>Home</LinkButton>
+            </MenuButton>
+            <MenuButton>
+              <LinkButton to={"/AddPost"}>Add post</LinkButton>
+            </MenuButton>
+            <MenuButton>
+              <LinkButton to={"/Home"}>Profile</LinkButton>
+            </MenuButton>
           </BlockButton>
           <BlockButton>
             <Topics>
@@ -39,13 +47,18 @@ const Header = ({
                 <TopicImg src={dark} alt="dark topic" />
               </Topic>
             </Topics>
-            <TopicButton>Log Out</TopicButton>
+            <TopicButton>
+              <LinkButton to={"/SignIn"}>Log Out</LinkButton>
+            </TopicButton>
           </BlockButton>
         </MenuDiv>
       )}
+      {search && (
+        <InputSearch type="search" placeholder="Search..."></InputSearch>
+      )}
       <Block>
-        <Search>
-          <SearchImg src={search} alt="Search"></SearchImg>
+        <Search onClick={() => setSearch(!search)}>
+          <SearchImg src={searchImg} alt="Search"></SearchImg>
         </Search>
         <User userName="Artem Malkin" />
       </Block>
@@ -62,6 +75,16 @@ const Container = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 0 32px;
+`;
+
+const InputSearch = styled.input`
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  background-color: rgba(83, 96, 205, 1);
+  color: rgb(255 255 255);
+  border: none;
+  outline: none;
 `;
 const Menu = styled.div`
   align-items: center;
@@ -105,16 +128,28 @@ const MenuDiv = styled.menu`
 const BlockButton = styled.div`
   width: 100%;
 `;
-const MenuButton = styled.button`
+const MenuButton = styled.div`
   height: 75px;
-  width: 100%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(255 255 255);
   border: 1px solid rgba(232, 232, 232, 1);
   &:hover {
     color: rgba(34, 49, 170, 1);
   }
 `;
+
+const LinkButton = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
 const Topics = styled.div`
   display: flex;
   width: 100%;
@@ -134,9 +169,8 @@ const Topic = styled.div`
   }
 `;
 const TopicImg = styled.img``;
-const TopicButton = styled.button`
+const TopicButton = styled.div`
   height: 75px;
-  width: 100%;
   cursor: pointer;
   background-color: rgba(232, 232, 232, 1);
   border: 1px solid rgba(232, 232, 232, 1);

@@ -5,6 +5,7 @@ import IconLike from "../image/IconLike.png";
 import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -14,7 +15,9 @@ const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
       <Div>
         <Block>
           <Date>{date}</Date>
-          <Title>{title}</Title>
+          <Title>
+            <LinkTitle to={"/SelectedPost"}>{title}</LinkTitle>
+          </Title>
         </Block>
 
         <Block>
@@ -74,6 +77,18 @@ const Container = styled.article`
   border-bottom: 1px solid rgba(218, 218, 218, 1);
   width: 100%;
   position: relative;
+  height: 210px;
+`;
+
+const LinkTitle = styled(Link)`
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 10px;
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    color: rgba(34, 49, 170, 1);
+  }
 `;
 
 const Div = styled.div`

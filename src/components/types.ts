@@ -55,9 +55,9 @@ export type TPostCardXlProps = {
 };
 
 export type TBlockForSendingDataProps = {
-  buttonSignName: string;
-  buttonbackName: string;
-  description: string;
+  buttonSignName?: string;
+  buttonbackName?: string;
+  description?: string;
 };
 
 export type TAccountActivationNotification = {
@@ -79,6 +79,6 @@ export type TPostCard = {
 };
 
 export type TSelectedPostProps = {
-  postCard:  TPostCard;
+  postCard: TPostCard;
   isTopicColor: boolean;
 };
