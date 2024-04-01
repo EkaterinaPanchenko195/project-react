@@ -22,6 +22,8 @@ import WrongAddress from "./components/WrongAddress";
 // import Tabs from "./components/Tabs";
 // import Input from "./components/Input";
 // import Textarea from "./components/Textarea";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleColor } from "./Redax/slice";
 
 const postCard: TPostCard[] = [
   {
@@ -186,10 +188,11 @@ const defoltPostCardSData = [
 ];
 
 const App = () => {
-  const onClick = () => {
-    alert("localhost");
-  };
-  const [isTopicColor, setIsTopicColor] = useState(true);
+  const dispatch = useDispatch();
+
+  const isTopicColor = useSelector((state: any) => state.isTopicColor);
+
+  const setIsTopicColor = () => dispatch(toggleColor());
 
   return (
     <>
