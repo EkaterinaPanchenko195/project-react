@@ -6,10 +6,28 @@ import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../Redax/store";
+import { decrement, increment } from "../Redax/slices/reactionTrackingSlice";
 
-const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
+const PostCardS = ({
+  postCard: { id, image, date, title },
+  isTopicColor,
+}: TPostCardXlProps) => {
+  const dispatch = useDispatch();
+
+  const isReactionTrackingLike = useSelector(
+    (state: IRootState) => state.reactionTracking.like
+  );
+  const isReactionTrackingDislike = useSelector(
+    (state: IRootState) => state.reactionTracking.dislike
+  );
+
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const { id, image, date, title } = postCard;
+
+  const setisReactionTrackingIncrement = () => dispatch(increment());
+  const setisReactionTrackingDecrement = () => dispatch(decrement());
+
   return (
     <Container key={id}>
       <LinkTitle to={`/SelectedPost/${id}`}>
@@ -25,22 +43,31 @@ const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
             </BlockImg>
           </Block>
         </Div>
+        </LinkTitle>
         <Div>
           <Response>
             <DivIcon>
               <ResponseImage
+                onClick={setisReactionTrackingIncrement}
                 $istopiccolor={isTopicColor}
                 src={IconLike}
                 alt="IconLike"
               />
             </DivIcon>
+            {isReactionTrackingLike !== 0 && (
+              <Counter>{isReactionTrackingLike}</Counter>
+            )}
             <DivIcon>
               <ResponseImage
+                onClick={setisReactionTrackingDecrement}
                 $istopiccolor={isTopicColor}
                 src={IconDislike}
                 alt="IconDislike"
               />
             </DivIcon>
+            {isReactionTrackingDislike !== 0 && (
+              <Counter>{isReactionTrackingDislike}</Counter>
+            )}
           </Response>
           <Response>
             <DivIcon>
@@ -65,7 +92,7 @@ const PostCardS = ({ postCard, isTopicColor }: TPostCardXlProps) => {
             <MenuButton>Delete</MenuButton>
           </MenuDiv>
         )}
-      </LinkTitle>
+
     </Container>
   );
 };
@@ -78,6 +105,10 @@ const Container = styled.article`
   width: 100%;
   position: relative;
   height: 210px;
+`;
+
+const Counter = styled.h2`
+  font-size: 15px;
 `;
 
 const LinkTitle = styled(Link)`

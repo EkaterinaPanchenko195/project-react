@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ListOfPosts from "./components/ListOfPosts";
 import Header from "./components/Header";
-import { useState } from "react";
 import SignUp from "./components/SignUp";
 import SuccessfulConfirmation from "./components/SuccessfulConfirmation";
 import Success from "./components/Success";
@@ -23,7 +22,8 @@ import WrongAddress from "./components/WrongAddress";
 // import Input from "./components/Input";
 // import Textarea from "./components/Textarea";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleColor } from "./Redax/slice";
+import { toggleColor } from "./Redax/slices/IsTopicColorSlice";
+import { IRootState } from "./Redax/store";
 
 const postCard: TPostCard[] = [
   {
@@ -190,7 +190,7 @@ const defoltPostCardSData = [
 const App = () => {
   const dispatch = useDispatch();
 
-  const isTopicColor = useSelector((state: any) => state.isTopicColor);
+  const isTopicColor = useSelector((state: IRootState) => state.isTopicColor);
 
   const setIsTopicColor = () => dispatch(toggleColor());
 

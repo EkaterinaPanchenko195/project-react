@@ -6,10 +6,28 @@ import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../Redax/store";
+import { decrement, increment } from "../Redax/slices/reactionTrackingSlice";
 
-const PostCardXl = ({ postCard, isTopicColor }: TPostCardXlProps) => {
-  const { id, image, date, title, description } = postCard;
+const PostCardXl = ({
+  postCard: { id, image, date, title, description },
+  isTopicColor,
+}: TPostCardXlProps) => {
+  const dispatch = useDispatch();
+
+  const isReactionTrackingLike = useSelector(
+    (state: IRootState) => state.reactionTracking.like
+  );
+  const isReactionTrackingDislike = useSelector(
+    (state: IRootState) => state.reactionTracking.dislike
+  );
+
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const setisReactionTrackingIncrement = () => dispatch(increment());
+  const setisReactionTrackingDecrement = () => dispatch(decrement());
+
   return (
     <>
       <Container key={id}>
@@ -27,47 +45,55 @@ const PostCardXl = ({ postCard, isTopicColor }: TPostCardXlProps) => {
               </BlockImg>
             </Block>
           </Div>
-          <Div>
-            <Response>
-              <DivIcon>
-                <ResponseImage
-                  $istopiccolor={isTopicColor}
-                  src={IconLike}
-                  alt="IconLike"
-                />
-              </DivIcon>
-              <DivIcon>
-                <ResponseImage
-                  $istopiccolor={isTopicColor}
-                  src={IconDislike}
-                  alt="IconDislike"
-                />
-              </DivIcon>
-            </Response>
-            <Response>
-              <DivIcon>
-                <ResponseImage
-                  $istopiccolor={isTopicColor}
-                  src={IconSave}
-                  alt="IconSave"
-                />
-              </DivIcon>
-              <DivIcon onClick={() => setIsMenuVisible(!isMenuVisible)}>
-                <ResponseImage
-                  $istopiccolor={isTopicColor}
-                  src={IconMore}
-                  alt="IconMore"
-                />
-              </DivIcon>
-            </Response>
-          </Div>
-          {isMenuVisible && (
-            <MenuDiv>
-              <MenuButton>Edit</MenuButton>
-              <MenuButton>Delete</MenuButton>
-            </MenuDiv>
-          )}
         </LinkTitle>
+        <Div>
+          <Response>
+            <DivIcon>
+              <ResponseImage
+                onClick={setisReactionTrackingIncrement}
+                $istopiccolor={isTopicColor}
+                src={IconLike}
+                alt="IconLike"
+              />
+            </DivIcon>
+            {isReactionTrackingLike !== 0 && (
+              <Counter>{isReactionTrackingLike}</Counter>
+            )}
+            <DivIcon>
+              <ResponseImage
+                onClick={setisReactionTrackingDecrement}
+                $istopiccolor={isTopicColor}
+                src={IconDislike}
+                alt="IconDislike"
+              />
+            </DivIcon>
+            {isReactionTrackingDislike !== 0 && (
+              <Counter>{isReactionTrackingDislike}</Counter>
+            )}
+          </Response>
+          <Response>
+            <DivIcon>
+              <ResponseImage
+                $istopiccolor={isTopicColor}
+                src={IconSave}
+                alt="IconSave"
+              />
+            </DivIcon>
+            <DivIcon onClick={() => setIsMenuVisible(!isMenuVisible)}>
+              <ResponseImage
+                $istopiccolor={isTopicColor}
+                src={IconMore}
+                alt="IconMore"
+              />
+            </DivIcon>
+          </Response>
+        </Div>
+        {isMenuVisible && (
+          <MenuDiv>
+            <MenuButton>Edit</MenuButton>
+            <MenuButton>Delete</MenuButton>
+          </MenuDiv>
+        )}
       </Container>
     </>
   );
@@ -80,6 +106,10 @@ const Container = styled.article`
   border-bottom: 1px solid rgba(218, 218, 218, 1);
   position: relative;
   width: 100%;
+`;
+
+const Counter = styled.h2`
+  font-size: 15px;
 `;
 
 const LinkTitle = styled(Link)`
