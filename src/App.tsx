@@ -20,8 +20,8 @@ import WrongAddress from "./components/WrongAddress";
 // import Input from "./components/Input";
 // import Textarea from "./components/Textarea";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleColor } from "./redax/slices/IsTopicColorSlice";
-import { IRootState } from "./redax/store";
+import { toggleColor } from "./redux/slices/IsTopicColorSlice";
+import { IRootState } from "./redux/store";
 
 const postCard: TPostCard[] = [
   {

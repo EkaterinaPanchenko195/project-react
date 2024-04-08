@@ -7,8 +7,10 @@ import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../redax/store";
-import { decrement, increment } from "../redax/slices/reactionTrackingSlice";
+import { IRootState } from "../redux/store";
+import { decrement, increment } from "../redux/slices/reactionTrackingSlice";
+import { saves } from "../redux/slices/ savPosts";
+
 
 const PostCardS = ({
   postCard: { id, image, date, title },
@@ -27,6 +29,8 @@ const PostCardS = ({
 
   const setisReactionTrackingIncrement = () => dispatch(increment());
   const setisReactionTrackingDecrement = () => dispatch(decrement());
+  const addNewPost = () => dispatch(saves({ id, image, date, title }));
+
 
   return (
     <Container key={id}>
@@ -72,6 +76,7 @@ const PostCardS = ({
           <Response>
             <DivIcon>
               <ResponseImage
+                onClick={addNewPost}
                 $istopiccolor={isTopicColor}
                 src={IconSave}
                 alt="IconSave"

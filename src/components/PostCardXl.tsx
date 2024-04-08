@@ -7,8 +7,9 @@ import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../redax/store";
-import { decrement, increment } from "../redax/slices/reactionTrackingSlice";
+import { IRootState } from "../redux/store";
+import { decrement, increment } from "../redux/slices/reactionTrackingSlice";
+import { saves } from "../redux/slices/ savPosts";
 
 const PostCardXl = ({
   postCard: { id, image, date, title, description },
@@ -22,11 +23,12 @@ const PostCardXl = ({
   const isReactionTrackingDislike = useSelector(
     (state: IRootState) => state.reactionTracking.dislike
   );
-
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const setisReactionTrackingIncrement = () => dispatch(increment());
   const setisReactionTrackingDecrement = () => dispatch(decrement());
+  const addNewPost = () =>
+    dispatch(saves({ id, image, date, title, description }));
 
   return (
     <>
@@ -74,6 +76,7 @@ const PostCardXl = ({
           <Response>
             <DivIcon>
               <ResponseImage
+                onClick={addNewPost}
                 $istopiccolor={isTopicColor}
                 src={IconSave}
                 alt="IconSave"

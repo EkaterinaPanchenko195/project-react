@@ -6,9 +6,10 @@ import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { IRootState } from "../redax/store";
+import { IRootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "../redax/slices/reactionTrackingSlice";
+import { decrement, increment } from "../redux/slices/reactionTrackingSlice";
+import { saves } from "../redux/slices/ savPosts";
 
 const PostCardM = ({
   postCard: { id, image, date, title },
@@ -27,6 +28,7 @@ const PostCardM = ({
 
   const setisReactionTrackingIncrement = () => dispatch(increment());
   const setisReactionTrackingDecrement = () => dispatch(decrement());
+  const addNewPost = () => dispatch(saves({ id, image, date, title }));
 
   return (
     <Container key={id}>
@@ -71,6 +73,7 @@ const PostCardM = ({
         <Response>
           <DivIcon>
             <ResponseImage
+              onClick={addNewPost}
               $istopiccolor={isTopicColor}
               src={IconSave}
               alt="IconSave"
