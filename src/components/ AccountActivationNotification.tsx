@@ -14,7 +14,7 @@ const AccountActivationNotification = ({
       <Span>{email}</Span>
       <Description> {descriptionEmail}</Description>
       <Button>
-        <LinkButton to="/Home">{button}</LinkButton>
+        <LinkButton to="/home">{button}</LinkButton>
       </Button>
     </Conntainer>
   );

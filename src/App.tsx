@@ -9,8 +9,6 @@ import SignIn from "./components/SignIn";
 import SelectedPost from "./components/SelectedPost";
 import SelectedPostImg from "./image/SelectedPost.svg";
 import { TPostCard } from "./components/types";
-import imageBlock from "./image/postCard.svg";
-import imageM from "./image/PostCardM.svg";
 import { Route, Routes, useParams } from "react-router-dom";
 import AddPost from "./components/AddPost";
 import WrongAddress from "./components/WrongAddress";
@@ -22,8 +20,8 @@ import WrongAddress from "./components/WrongAddress";
 // import Input from "./components/Input";
 // import Textarea from "./components/Textarea";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleColor } from "./Redax/slices/IsTopicColorSlice";
-import { IRootState } from "./Redax/store";
+import { toggleColor } from "./redax/slices/IsTopicColorSlice";
+import { IRootState } from "./redax/store";
 
 const postCard: TPostCard[] = [
   {
@@ -40,157 +38,19 @@ const postCard: TPostCard[] = [
   },
 ];
 
-const defoltPostCardData = [
-  {
-    id: 20240118,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-];
-
-const defoltPostCardMData = [
-  {
-    id: 20240118,
-    image: imageM,
-    text: "",
-    date: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240119,
-    image: imageM,
-    text: "",
-    date: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240110,
-    image: imageM,
-    text: "",
-    date: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240111,
-    image: imageM,
-    text: "",
-    date: "April 20, 2021",
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-];
-
-const defoltPostCardSData = [
-  {
-    id: 20240129,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    //date: Date().split(" ").slice(1, 4).join(" "),
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240120,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    //date: Date().split(" ").slice(1, 4).join(" "),
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240121,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    //date: Date().split(" ").slice(1, 4).join(" "),
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240122,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    //date: Date().split(" ").slice(1, 4).join(" "),
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240123,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    //date: Date().split(" ").slice(1, 4).join(" "),
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-  {
-    id: 20240124,
-    image: imageBlock,
-    text: "",
-    date: "April 20, 2021",
-    //date: Date().split(" ").slice(1, 4).join(" "),
-    lesson_num: 0,
-    title:
-      "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-    description:
-      "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    author: 0,
-  },
-];
-
 const App = () => {
   const dispatch = useDispatch();
 
   const isTopicColor = useSelector((state: IRootState) => state.isTopicColor);
+  const defoltPostCardData = useSelector(
+    (state: IRootState) => state.defoltPostCardData
+  );
+  const defoltPostCardMData = useSelector(
+    (state: IRootState) => state.defoltPostCardMData
+  );
+  const defoltPostCardSData = useSelector(
+    (state: IRootState) => state.defoltPostCardSData
+  );
 
   const setIsTopicColor = () => dispatch(toggleColor());
 

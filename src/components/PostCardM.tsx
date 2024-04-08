@@ -6,9 +6,9 @@ import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { IRootState } from "../Redax/store";
+import { IRootState } from "../redax/store";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "../Redax/slices/reactionTrackingSlice";
+import { decrement, increment } from "../redax/slices/reactionTrackingSlice";
 
 const PostCardM = ({
   postCard: { id, image, date, title },

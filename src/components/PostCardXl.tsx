@@ -7,8 +7,8 @@ import IconSave from "../image/IconSave.png";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../Redax/store";
-import { decrement, increment } from "../Redax/slices/reactionTrackingSlice";
+import { IRootState } from "../redax/store";
+import { decrement, increment } from "../redax/slices/reactionTrackingSlice";
 
 const PostCardXl = ({
   postCard: { id, image, date, title, description },
