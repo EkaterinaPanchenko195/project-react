@@ -4,7 +4,8 @@ import reactionTrackingReducer from "./slices/reactionTrackingSlice";
 import defoltPostCardDataReducer from "./slices/postXl";
 import defoltPostCardMDataReducer from "./slices/postsM";
 import defoltPostCardSDataReducer from "./slices/postsS";
-import savPostsReducer from "./slices/ savPosts";
+import savPostsReducer from "./slices/savPosts";
+import isFavoritesPostsReduser from "./slices/isFavoritesPosts";
 
 const rootReducer = {
   // общий объект для всех slise
@@ -14,6 +15,7 @@ const rootReducer = {
   defoltPostCardMData: defoltPostCardMDataReducer,
   defoltPostCardSData: defoltPostCardSDataReducer,
   savPosts: savPostsReducer,
+  isFavoritesPosts: isFavoritesPostsReduser,
 };
 
 const store = configureStore({

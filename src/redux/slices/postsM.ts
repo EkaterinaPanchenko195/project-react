@@ -1,59 +1,60 @@
-import { createSlice } from "@reduxjs/toolkit";
-import imageM from "../../image/PostCardM.svg";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+
+export const fetchLimitBlogM = createAsyncThunk(
+  // получаем api
+  "postCardMData/fetchPostCardMData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        "https://studapi.teachmeskills.by/blog/posts/?limit=4"
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error("что-то пошло не так");
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  }
+);
 
 const defoltPostCardMData = createSlice({
-  name: "reactionTracking",
-  initialState: [
-    {
-      id: 20240118,
-      image: imageM,
-      text: "",
-      date: "April 20, 2021",
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240119,
-      image: imageM,
-      text: "",
-      date: "April 20, 2021",
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240110,
-      image: imageM,
-      text: "",
-      date: "April 20, 2021",
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240111,
-      image: imageM,
-      text: "",
-      date: "April 20, 2021",
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-  ],
+  name: "postCardMData",
+  initialState: {
+    posts: [],
+    status: null,
+    error: null,
+  },
   reducers: {},
+  extraReducers: (builder) => {
+    return (
+      builder.addCase(fetchLimitBlogM.pending, (state: any) => {
+        // pending - в ожидании
+        state.status = "loading";
+        state.error = null;
+        // console.log(current(state));
+      }),
+      builder.addCase(
+        fetchLimitBlogM.fulfilled,
+        // fulfilled - выполнено
+        (state: any, { payload }: { payload: any }) => {
+          state.status = "resolved";
+          state.posts = payload.results;
+          console.log("current resolved", current(state));
+        }
+      ),
+      builder.addCase(
+        fetchLimitBlogM.rejected,
+        // rejected -  отклоненный
+        (state: any, { payload }: { payload: any }) => {
+          state.status = "resolved";
+          state.posts = payload;
+          // console.log(current(state));
+        }
+      )
+    );
+  },
 });
 
 const { actions, reducer } = defoltPostCardMData;

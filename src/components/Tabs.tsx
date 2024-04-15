@@ -1,26 +1,42 @@
 import styled from "styled-components";
 import { TTabsProps } from "./types";
+import { useDispatch, useSelector } from "react-redux";
+import { favoritPosts } from "../redux/slices/isFavoritesPosts";
+import { IRootState } from "../redux/store";
 
-const Tabs = ({ tabs, isTopicColor }: TTabsProps) => (
-  <Container>
-    {tabs.map(({ id, isActive, text, isDisabled }) => (
-      <StyledButton
-        $istopiccolor={isTopicColor}
-        key={id}
-        $isactive={isActive}
-        disabled={isDisabled}
-      >
-        {text}
-      </StyledButton>
-    ))}
-  </Container>
-);
+const Tabs = ({ tabs, isTopicColor }: TTabsProps) => {
+  const dispatch = useDispatch();
+
+  const isFavoritesPosts = useSelector(
+    (state: IRootState) => state.isFavoritesPosts
+  );
+
+  const setIsFavoritesPosts = (id: number) => {
+    dispatch(favoritPosts(id === 1));
+  };
+  return (
+    <Container>
+      {tabs.map(({ id, isActive, text, isDisabled }) => (
+        <StyledButton
+          onClick={() => setIsFavoritesPosts(id)}
+          $istopiccolor={isTopicColor}
+          key={id}
+          $isactive={isActive}
+          disabled={isDisabled}
+        >
+          {text}
+        </StyledButton>
+      ))}
+    </Container>
+  );
+};
 
 export default Tabs;
 
 const Container = styled.div`
   display: flex;
 `;
+const BlockS = styled.div``;
 
 const StyledButton = styled.button<{
   $isactive: boolean;

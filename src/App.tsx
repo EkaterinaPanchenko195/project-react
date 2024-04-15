@@ -22,6 +22,10 @@ import WrongAddress from "./components/WrongAddress";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleColor } from "./redux/slices/IsTopicColorSlice";
 import { IRootState } from "./redux/store";
+import { useEffect } from "react";
+import { fetchLimitBlogM } from "./redux/slices/postsM";
+import { fetchLimitBlogS } from "./redux/slices/postsS";
+import { fetchLimitBlogXl } from "./redux/slices/postXl";
 
 const postCard: TPostCard[] = [
   {
@@ -39,20 +43,28 @@ const postCard: TPostCard[] = [
 ];
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()<any>;
 
   const isTopicColor = useSelector((state: IRootState) => state.isTopicColor);
   const defoltPostCardData = useSelector(
-    (state: IRootState) => state.defoltPostCardData
+    (state: IRootState) => state.defoltPostCardData.posts
   );
   const defoltPostCardMData = useSelector(
-    (state: IRootState) => state.defoltPostCardMData
+    (state: IRootState) => state.defoltPostCardMData.posts
   );
   const defoltPostCardSData = useSelector(
-    (state: IRootState) => state.defoltPostCardSData
+    (state: IRootState) => state.defoltPostCardSData.posts
   );
 
+  useEffect(() => {
+    dispatch(fetchLimitBlogM()); // вызываем вместо actions/reduser  функцию с асинхроном
+    dispatch(fetchLimitBlogS()); // вызываем вместо actions/reduser  функцию с асинхроном
+    dispatch(fetchLimitBlogXl()); // вызываем вместо actions/reduser  функцию с асинхроном
+  }, []);
+
   const setIsTopicColor = () => dispatch(toggleColor());
+
+  console.log("defoltPostCardMData", defoltPostCardMData);
 
   return (
     <>

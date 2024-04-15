@@ -1,91 +1,64 @@
-import { createSlice } from "@reduxjs/toolkit";
-import imageBlock from "../../image/postCard.svg";
 
-const defoltPostCardSData = createSlice({
-  name: "reactionTracking",
-  initialState: [
-    {
-      id: 20240129,
-      image: imageBlock,
-      text: "",
-      date: "April 20, 2021",
-      //date: Date().split(" ").slice(1, 4).join(" "),
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240120,
-      image: imageBlock,
-      text: "",
-      date: "April 20, 2021",
-      //date: Date().split(" ").slice(1, 4).join(" "),
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240121,
-      image: imageBlock,
-      text: "",
-      date: "April 20, 2021",
-      //date: Date().split(" ").slice(1, 4).join(" "),
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240122,
-      image: imageBlock,
-      text: "",
-      date: "April 20, 2021",
-      //date: Date().split(" ").slice(1, 4).join(" "),
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240123,
-      image: imageBlock,
-      text: "",
-      date: "April 20, 2021",
-      //date: Date().split(" ").slice(1, 4).join(" "),
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-    {
-      id: 20240124,
-      image: imageBlock,
-      text: "",
-      date: "April 20, 2021",
-      //date: Date().split(" ").slice(1, 4).join(" "),
-      lesson_num: 0,
-      title:
-        "Astronauts prep for new solar arrays on nearly seven-hour spacewalk ...",
-      description:
-        "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-      author: 0,
-    },
-  ],
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+
+
+export const fetchLimitBlogS = createAsyncThunk(
+  // получаем api
+  "postCardMData/fetchPostCardMData",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        "https://studapi.teachmeskills.by/blog/posts/?limit=6"
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error("что-то пошло не так");
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  }
+);
+
+const defoltPostCardMData = createSlice({
+  name: "postCardMData",
+  initialState: {
+    posts: [],
+    status: null,
+    error: null,
+  },
   reducers: {},
+  extraReducers: (builder) => {
+    return (
+      builder.addCase(fetchLimitBlogS.pending, (state: any) => {
+        // pending - в ожидании
+        state.status = "loading";
+        state.error = null;
+        // console.log(current(state));
+      }),
+      builder.addCase(
+        fetchLimitBlogS.fulfilled,
+        // fulfilled - выполнено
+        (state: any, { payload }: { payload: any }) => {
+          state.status = "resolved";
+          state.posts = payload.results;
+          console.log("current resolved", current(state));
+        }
+      ),
+      builder.addCase(
+        fetchLimitBlogS.rejected,
+        // rejected -  отклоненный
+        (state: any, { payload }: { payload: any }) => {
+          state.status = "resolved";
+          state.posts = payload;
+          // console.log(current(state));
+        }
+      )
+    );
+  },
 });
 
-const { actions, reducer } = defoltPostCardSData;
+const { actions, reducer } = defoltPostCardMData;
 export const {} = actions;
 export default reducer;

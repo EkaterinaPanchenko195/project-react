@@ -9,7 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../redux/store";
 import { decrement, increment } from "../redux/slices/reactionTrackingSlice";
-import { saves } from "../redux/slices/ savPosts";
+import { favorites } from "../redux/slices/savPosts";
 
 const PostCardXl = ({
   postCard: { id, image, date, title, description },
@@ -28,7 +28,7 @@ const PostCardXl = ({
   const setisReactionTrackingIncrement = () => dispatch(increment());
   const setisReactionTrackingDecrement = () => dispatch(decrement());
   const addNewPost = () =>
-    dispatch(saves({ id, image, date, title, description }));
+    dispatch(favorites({ id, image, date, title, description }));
 
   return (
     <>

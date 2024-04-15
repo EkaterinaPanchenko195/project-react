@@ -4,12 +4,12 @@ import IconDislike from "../image/IconDislike.png";
 import IconLike from "../image/IconLike.png";
 import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IRootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "../redux/slices/reactionTrackingSlice";
-import { saves } from "../redux/slices/ savPosts";
+import { favorites } from "../redux/slices/savPosts";
 
 const PostCardM = ({
   postCard: { id, image, date, title },
@@ -28,7 +28,7 @@ const PostCardM = ({
 
   const setisReactionTrackingIncrement = () => dispatch(increment());
   const setisReactionTrackingDecrement = () => dispatch(decrement());
-  const addNewPost = () => dispatch(saves({ id, image, date, title }));
+  const addNewPost = () => dispatch(favorites({ id, image, date, title }));
 
   return (
     <Container key={id}>

@@ -6,6 +6,8 @@ import Menu from "./Menu";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { TPostCard } from "./types";
+import { useSelector } from "react-redux";
+import { IRootState } from "../redux/store";
 
 const ListOfPosts = ({
   isTopicColor,
@@ -28,50 +30,70 @@ const ListOfPosts = ({
     null
   );
 
+  const isFavoritesPosts = useSelector(
+    (state: IRootState) => state.isFavoritesPosts
+  );
+  const dataFavoritsPosts = useSelector(
+    (state: IRootState) => state.savPosts
+  ) as any[];
+  const state = useSelector((state: IRootState) => state);
+
   useEffect(() => {
     setDefoltPostCard(defoltPostCardData);
     setDefoltPostCardM(defoltPostCardMData);
     setDefoltPostCardS(defoltPostCardSData);
   });
-
+  // console.log(state, dataFavoritsPosts);
   return (
     <Block>
       <Menu isTopicColor={isTopicColor} text="Blog" />
-      <Container>
-        <BlockM>
-          {defoltPostCard === null
-            ? null
-            : defoltPostCard.map((postCard) => (
-                <PostCardXl
-                  key={postCard.id}
-                  isTopicColor={isTopicColor}
-                  postCard={postCard}
-                />
-              ))}
-          <BlockostCardM>
-            {defoltPostCardM === null
+      {isFavoritesPosts && dataFavoritsPosts ? (
+        <BlockS>
+          {dataFavoritsPosts.map((postCard) => (
+            <PostCardS
+              key={postCard.id}
+              isTopicColor={isTopicColor}
+              postCard={postCard}
+            />
+          ))}
+        </BlockS>
+      ) : (
+        <Container>
+          <BlockM>
+            {defoltPostCard === null
               ? null
-              : defoltPostCardM.map((postCard) => (
-                  <PostCardM
+              : defoltPostCard.map((postCard) => (
+                  <PostCardXl
                     key={postCard.id}
                     isTopicColor={isTopicColor}
                     postCard={postCard}
                   />
                 ))}
-          </BlockostCardM>
-        </BlockM>
-        <BlockS>
-          {defoltPostCardS === null
-            ? null
-            : defoltPostCardS.map((postCard) => (
-                <PostCardS
-                  key={postCard.id}
-                  isTopicColor={isTopicColor}
-                  postCard={postCard}
-                />
-              ))}
-        </BlockS>
-      </Container>
+            <BlockostCardM>
+              {defoltPostCardM === null
+                ? null
+                : defoltPostCardM.map((postCard) => (
+                    <PostCardM
+                      key={postCard.id}
+                      isTopicColor={isTopicColor}
+                      postCard={postCard}
+                    />
+                  ))}
+            </BlockostCardM>
+          </BlockM>
+          <BlockS>
+            {defoltPostCardS === null
+              ? null
+              : defoltPostCardS.map((postCard) => (
+                  <PostCardS
+                    key={postCard.id}
+                    isTopicColor={isTopicColor}
+                    postCard={postCard}
+                  />
+                ))}
+          </BlockS>
+        </Container>
+      )}
     </Block>
   );
 };
