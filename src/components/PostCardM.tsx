@@ -145,7 +145,8 @@ const Description = styled.p`
   line-height: 28px;
 `;
 const Avatar = styled.img`
-  width: 100%;
+  width: 352px;
+  height: 246px;
 `;
 const Response = styled.div`
   display: flex;

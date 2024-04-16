@@ -34,6 +34,8 @@ export type TInputProps = {
   isDisabled: boolean;
   hasError: boolean;
   type: string;
+  value?: string;
+  onChange?: (e: any) => void;
 };
 
 export type TTextareaProps = {
@@ -58,6 +60,7 @@ export type TBlockForSendingDataProps = {
   buttonSignName?: string;
   buttonbackName?: string;
   description?: string;
+  onClick?: (e: any) => void;
 };
 
 export type TAccountActivationNotification = {

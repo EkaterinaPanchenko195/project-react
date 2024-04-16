@@ -5,7 +5,7 @@ import IconLike from "../image/IconLike.png";
 import IconMore from "../image/IconMore.png";
 import IconSave from "../image/IconSave.png";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../redux/store";
 import { decrement, increment } from "../redux/slices/reactionTrackingSlice";
@@ -137,13 +137,20 @@ const Date = styled.div`
 const DivIcon = styled.div`
   cursor: pointer;
 `;
-const BlockImg = styled.div``;
+const BlockImg = styled.div`
+width: 256px;
+height: 244px;
+`;
 const Title = styled.h2``;
 const Description = styled.p`
   color: rgba(141, 142, 151, 1);
   line-height: 28px;
 `;
-const Avatar = styled.img``;
+const Avatar = styled.img`
+width: 256px;
+height: 244px;
+
+`;
 const Response = styled.div`
   display: flex;
   gap: 24px;

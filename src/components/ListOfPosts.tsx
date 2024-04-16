@@ -43,7 +43,6 @@ const ListOfPosts = ({
     setDefoltPostCardM(defoltPostCardMData);
     setDefoltPostCardS(defoltPostCardSData);
   });
-  // console.log(state, dataFavoritsPosts);
   return (
     <Block>
       <Menu isTopicColor={isTopicColor} text="Blog" />

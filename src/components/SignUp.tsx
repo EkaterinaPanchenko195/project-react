@@ -4,8 +4,34 @@ import Title from "./Title";
 import Input from "./Input";
 import BlockForSendingData from "./BlockForSendingData";
 import ButtonSign from "./ButtonSign";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchSignUp } from "../redux/slices/signUp";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate(); // вместо Link
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const signUp = useCallback(() => { // useCallback - для мемоизации
+    console.log({
+      username: name,
+      email: email,
+      password: password,
+    });
+    dispatch(
+      fetchSignUp({
+        username: name,
+        email: email,
+        password: password,
+      })
+    );
+    navigate("/successfulConfirmation");// вместо Link
+  }, [name, email, password]);
   return (
     <>
       <Container>
@@ -21,6 +47,8 @@ const SignUp = () => {
             isDisabled={false}
             hasError={false}
             type={"text"}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <Input
             placeholder={"Your email"}
@@ -28,6 +56,8 @@ const SignUp = () => {
             isDisabled={false}
             hasError={false}
             type={"email"}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             placeholder={"Your password"}
@@ -35,6 +65,8 @@ const SignUp = () => {
             isDisabled={false}
             hasError={false}
             type={"password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Input
             placeholder={"Confirm password"}
@@ -42,8 +74,10 @@ const SignUp = () => {
             isDisabled={false}
             hasError={false}
             type={"password"}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <ButtonSign buttonSignName={"Sign Up"}></ButtonSign>
+          <ButtonSign onClick={signUp} buttonSignName={"Sign Up"}></ButtonSign>
           <BlockForSendingData
             buttonbackName={"Sign In"}
             description={"Already have an account?"}
@@ -69,4 +103,5 @@ const Form = styled.form`
   align-items: center;
   border: 1px solid rgba(218, 218, 218, 1);
   padding: 40px;
+  width: 100%;
 `;

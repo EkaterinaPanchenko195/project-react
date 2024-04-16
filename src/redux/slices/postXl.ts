@@ -3,9 +3,9 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 
 export const fetchLimitBlogXl = createAsyncThunk(
   // получаем api
-  "postCardMData/fetchPostCardMData",
+  "postCardXLData/fetchPostCardMData",
   async (_, { rejectWithValue }) => {
-    try {
+    try { // попытаться сделать, то, что находится внутри try иначе catch
       const response = await fetch(
         "https://studapi.teachmeskills.by/blog/posts/?limit=1"
       );
@@ -20,8 +20,8 @@ export const fetchLimitBlogXl = createAsyncThunk(
   }
 );
 
-const defoltPostCardMData = createSlice({
-  name: "postCardMData",
+const defoltPostCardXLData = createSlice({
+  name: "postCardXLData",
   initialState: {
     posts: [],
     status: null,
@@ -42,7 +42,6 @@ const defoltPostCardMData = createSlice({
         (state: any, { payload }: { payload: any }) => {
           state.status = "resolved";
           state.posts = payload.results;
-          console.log("current resolved", current(state));
         }
       ),
       builder.addCase(
@@ -51,13 +50,12 @@ const defoltPostCardMData = createSlice({
         (state: any, { payload }: { payload: any }) => {
           state.status = "resolved";
           state.posts = payload;
-          // console.log(current(state));
         }
       )
     );
   },
 });
 
-const { actions, reducer } = defoltPostCardMData;
+const { actions, reducer } = defoltPostCardXLData;
 export const {} = actions;
 export default reducer;

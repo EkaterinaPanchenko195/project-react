@@ -56,6 +56,7 @@ const Form = styled.form`
   align-items: center;
   border: 1px solid rgba(218, 218, 218, 1);
   padding: 40px;
+  width: 100%;
 `;
 
 const Description = styled.p`

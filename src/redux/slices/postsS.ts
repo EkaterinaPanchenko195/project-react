@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 
 export const fetchLimitBlogS = createAsyncThunk(
   // получаем api
-  "postCardMData/fetchPostCardMData",
+  "postCardSData/fetchPostCardMData",
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
@@ -21,8 +21,8 @@ export const fetchLimitBlogS = createAsyncThunk(
   }
 );
 
-const defoltPostCardMData = createSlice({
-  name: "postCardMData",
+const defoltPostCardSData = createSlice({
+  name: "postCardSData",
   initialState: {
     posts: [],
     status: null,
@@ -43,7 +43,6 @@ const defoltPostCardMData = createSlice({
         (state: any, { payload }: { payload: any }) => {
           state.status = "resolved";
           state.posts = payload.results;
-          console.log("current resolved", current(state));
         }
       ),
       builder.addCase(
@@ -59,6 +58,6 @@ const defoltPostCardMData = createSlice({
   },
 });
 
-const { actions, reducer } = defoltPostCardMData;
+const { actions, reducer } = defoltPostCardSData;
 export const {} = actions;
 export default reducer;

@@ -64,8 +64,6 @@ const App = () => {
 
   const setIsTopicColor = () => dispatch(toggleColor());
 
-  console.log("defoltPostCardMData", defoltPostCardMData);
-
   return (
     <>
       <Header setIsTopicColor={setIsTopicColor} />

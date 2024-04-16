@@ -1,17 +1,31 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 
-export const fetchLimitBlogM = createAsyncThunk(
+export const fetchSignUp: any = createAsyncThunk(
   // получаем api
-  "postCardMData/fetchPostCardMData",
-  async (_, { rejectWithValue }) => {
+  "registrationUser/fetchSignUp",
+  async ({ username, email, password }: any, { rejectWithValue }) => {
     try {
+      const user = {
+        username: username,
+        email: email,
+        password: password,
+        course_group: 2,
+      };
+      console.log(user)
       const response = await fetch(
-        "https://studapi.teachmeskills.by/blog/posts/?limit=4"
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error("что-то пошло не так");
-      }
+        `https://studapi.teachmeskills.by/auth/users/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+        );
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error("что-то пошло не так");
+        }
       return data;
     } catch (error) {
       return rejectWithValue((error as Error).message);
@@ -19,8 +33,8 @@ export const fetchLimitBlogM = createAsyncThunk(
   }
 );
 
-const defoltPostCardMData = createSlice({
-  name: "postCardMData",
+const registration = createSlice({
+  name: "registrationUser",
   initialState: {
     posts: [],
     status: null,
@@ -29,22 +43,23 @@ const defoltPostCardMData = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     return (
-      builder.addCase(fetchLimitBlogM.pending, (state: any) => {
+      builder.addCase(fetchSignUp.pending, (state: any) => {
         // pending - в ожидании
         state.status = "loading";
         state.error = null;
         // console.log(current(state));
       }),
       builder.addCase(
-        fetchLimitBlogM.fulfilled,
+        fetchSignUp.fulfilled,
         // fulfilled - выполнено
         (state: any, { payload }: { payload: any }) => {
           state.status = "resolved";
           state.posts = payload.results;
+          console.log("current resolved", current(state));
         }
       ),
       builder.addCase(
-        fetchLimitBlogM.rejected,
+        fetchSignUp.rejected,
         // rejected -  отклоненный
         (state: any, { payload }: { payload: any }) => {
           state.status = "resolved";
@@ -55,6 +70,6 @@ const defoltPostCardMData = createSlice({
   },
 });
 
-const { actions, reducer } = defoltPostCardMData;
+const { actions, reducer } = registration;
 export const {} = actions;
 export default reducer;

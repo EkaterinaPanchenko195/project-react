@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { TBlockForSendingDataProps } from "./types";
 import { Link } from "react-router-dom";
 
-const ButtonSign = ({ buttonSignName }: TBlockForSendingDataProps) => {
+const ButtonSign = ({ buttonSignName, onClick }: TBlockForSendingDataProps) => {
   return (
-    <Button>
-      <LinkButton
+    <Button onClick={(e) => onClick?.(e)}>
+      {/* <LinkButton
         to={buttonSignName === "Sign In" ? "/home" : "/successfulConfirmation"}
       >
-        {buttonSignName}
-      </LinkButton>
+    </LinkButton> */}
+    {buttonSignName}
     </Button>
   );
 };
@@ -23,13 +23,9 @@ const Button = styled.div`
   font-size: 18px;
   height: 56px;
   width: 564px;
-`;
-
-const LinkButton = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+color: rgba(255, 255, 255, 1);
+text-decoration: none;
+display: flex;
+justify-content: center;
+align-items: center;
 `;
