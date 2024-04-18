@@ -6,6 +6,7 @@ import defoltPostCardMDataReducer from "./slices/postsM";
 import defoltPostCardSDataReducer from "./slices/postsS";
 import savPostsReducer from "./slices/savPosts";
 import isFavoritesPostsReduser from "./slices/isFavoritesPosts";
+import transitionToPostReduser from "./slices/transitionToPost";
 
 const rootReducer = {
   // общий объект для всех slise
@@ -16,6 +17,7 @@ const rootReducer = {
   defoltPostCardSData: defoltPostCardSDataReducer,
   savPosts: savPostsReducer,
   isFavoritesPosts: isFavoritesPostsReduser,
+  transitionToPost: transitionToPostReduser,
 };
 
 const store = configureStore({

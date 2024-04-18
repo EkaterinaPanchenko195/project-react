@@ -5,9 +5,30 @@ import IconDislike from "../image/IconDislike.png";
 import { TSelectedPostProps } from "./types";
 import rightArrow from "../image/rightArrow.svg";
 import leftArrow from "../image/leftArrow.svg";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPost } from "../redux/slices/transitionToPost";
+import { useEffect } from "react";
+import { IRootState } from "../redux/store";
 
-const SelectedPost = ({ postCard, isTopicColor }: TSelectedPostProps) => {
-  const { id, image, title, description } = postCard;
+const SelectedPost = ({ isTopicColor }: TSelectedPostProps) => {
+  const { id } = useParams<string>(); // достает id из адресной строки
+  const dispatch = useDispatch()<any>;
+  const post = useSelector(
+    (state: IRootState) => state.transitionToPost.selectedPost
+  );
+  console.log(post);
+
+  useEffect(() => {
+    typeof id === "string" && dispatch(fetchPost(id));
+  }, []);
+
+  if (!post) {
+    return null;
+  }
+
+  const { image, title, description } = post;
+
   return (
     <Container key={id}>
       <Block>

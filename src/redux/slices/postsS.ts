@@ -8,7 +8,7 @@ export const fetchLimitBlogS = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://studapi.teachmeskills.by/blog/posts/?limit=6"
+        "https://studapi.teachmeskills.by/blog/posts/?limit=6&offset=10"
       );
       const data = await response.json();
       if (!response.ok) {
